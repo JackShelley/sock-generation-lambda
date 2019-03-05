@@ -160,15 +160,6 @@ def lambda_handler(event:, context:)
   obj = bucket.object('image-generation/bmp.bmp')
   obj.get(response_target: '/tmp/bmp.bmp')
 
-  # bmp_url = "https://res.cloudinary.com/sock-club/image/upload/v1551456620/migration/PO7862_SubscriptionApril2019_Alt__B_168.bmp"
-  # topColor = "red"
-  # heelColor = "red"
-  # toeColor = "red"
-  # company = "fuck that"
-  # designNum = "1"
-  # cuff_url = ""
-  # baseFileName = "fuck_that"
-
   bmp_url = "/tmp/bmp.bmp"
   topColor = event["topColor"]
   heelColor = event["heelColor"]
@@ -394,28 +385,21 @@ def lambda_handler(event:, context:)
     flatView.new_image(373, 900)
   end
 
-  # skimage = Magick::ImageList.new("https://res.cloudinary.com/sock-club/image/upload/v1551458154/migration/PO7862_SubscriptionApril2019_Alt__A_FBSView.png")
-  # skimage.resize_to_fit!(1050,1200)
-  # skimage = skimage.flatten_images
-  # skimage.alpha(Magick::ActivateAlphaChannel)
-  # skimage.opacity = 0.5
-  # frontSideBack.composite!(skimage, 0, 0, Magick::OverCompositeOp)
-
   # BMP
   ############################################
   bmp = sockPattern
 
   # FLAT VIEW
   ############################################
-  # if mediumCC
-    sockPattern = sockPattern.resize_to_fit(sockWidth*2, 0)
-  # elsif largeCC
-  #   sockPattern = sockPattern.resize(363, 890)
-  # elsif smallCC
-  #   sockPattern = sockPattern.resize_to_fit(363, 730)
-  # elsif mediumAC
-  #   sockPattern = sockPattern.resize_to_fit(373, 890)
-  # end
+  if mediumCC
+    sockPattern = sockPattern.resize_to_fit(363, 890)
+  elsif largeCC
+    sockPattern = sockPattern.resize(363, 890)
+  elsif smallCC
+    sockPattern = sockPattern.resize_to_fit(363, 730)
+  elsif mediumAC
+    sockPattern = sockPattern.resize_to_fit(373, 890)
+  end
 
   flatView.composite!(sockPattern, 5, 5, Magick::OverCompositeOp)
 
@@ -867,5 +851,3 @@ def lambda_handler(event:, context:)
   return sockAttributes
 
 end
-
-# lambda_handler()
