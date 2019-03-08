@@ -8,7 +8,6 @@ require './colorFunctions.rb'
 require './attributeFunctions.rb'
 
 def lambda_handler(event:, context:)
-# def lambda_handler()
   #initialize s3 bucket
   bucket = Aws::S3::Resource.new(region: "us-east-1").bucket("account-sockclub-com")
   s3 = Aws::S3::Client.new(region: "us-east-1")
@@ -16,17 +15,6 @@ def lambda_handler(event:, context:)
   # retrieves bitmap from s3 which was uploaded immediately previous to the lambda call
   obj = bucket.object("image-generation/bmp.bmp")
   obj.get(response_target: "/tmp/bmp.bmp")
-
-  # bmp_url = "https://res.cloudinary.com/sock-club/image/upload/v1547739005/migration/fiuifyd4sepzdkxju1ja.bmp"
-  # bmp_url = "https://res.cloudinary.com/sock-club/image/upload/v1551824406/migration/PO7919_BigWild_ColorTest__168.bmp"
-  # bmp_url = "https://res.cloudinary.com/sock-club/image/upload/v1551819853/migration/PO7344_CAD_168.bmp"
-  # topColor = "red"
-  # heelColor = "red"
-  # toeColor = "red"
-  # company = "fuck that"
-  # designNum = "1"
-  # cuff_url = ""
-  # baseFileName = "fuck_that"
 
   # parameters of lambda function
   bmp_url = "/tmp/bmp.bmp"
@@ -582,5 +570,3 @@ def lambda_handler(event:, context:)
   #all stuff that needs to be submitted to zoho
   return sockAttributes
 end
-
-# lambda_handler()
